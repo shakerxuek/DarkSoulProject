@@ -14,6 +14,7 @@ public class InputHandler : MonoBehaviour
 
     public float rollInputTimer;
     public bool sprintFlag;
+    public bool comboFlag;
     public bool rollFlag;
     public bool b_Input;
     public bool rb_Input;
@@ -23,6 +24,7 @@ public class InputHandler : MonoBehaviour
     Playercontrol inputActions;
     PlayerAttacker playerAttacker;
     PlayerInventory playerInventory;
+    PlayerManager playerManager;
 
     Vector2 movementInput;
     Vector2 cameraInput;
@@ -32,6 +34,7 @@ public class InputHandler : MonoBehaviour
     {
         playerAttacker=GetComponent<PlayerAttacker>();
         playerInventory=GetComponent<PlayerInventory>();
+        playerManager=GetComponent<PlayerManager>();
     }
 
     
@@ -94,8 +97,18 @@ public class InputHandler : MonoBehaviour
         inputActions.Playeraction.RT.performed += i =>rt_Input=true;
 
         if(rb_Input)
-        {
-            playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
+        {   
+            if(playerManager.canDocombo)
+            {   
+                comboFlag=true;
+                playerAttacker.HandleWeaponCombo(playerInventory.rightWeapon);
+                comboFlag=false;
+            }
+            else
+            {
+                playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
+            }
+            
         }
         if(rt_Input)
         {

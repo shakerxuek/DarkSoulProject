@@ -12,6 +12,7 @@ public class PlayerManager : MonoBehaviour
     public bool isSpringting;
     public bool isInAir;
     public bool isGrounded;
+    public bool canDocombo;
 
     
 
@@ -27,6 +28,7 @@ public class PlayerManager : MonoBehaviour
     {   
         float delta=Time.deltaTime;
         isInteracting=anim.GetBool("isInteracting");
+        canDocombo=anim.GetBool("canDocombo");
         
         inputHandler.TickInput(delta);
         playerLocamotion.HandleMovement(delta);

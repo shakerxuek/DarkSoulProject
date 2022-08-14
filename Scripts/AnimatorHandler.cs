@@ -99,4 +99,14 @@ public class AnimatorHandler : MonoBehaviour
         Vector3 Velocity = deltaPosition/delta;
         playerLocamotion.rigidbody.velocity =Velocity;
     }
+
+    public void EnableCombo()
+    {
+        anim.SetBool("canDocombo", true);
+    }
+
+    public void DisableCombo()
+    {
+        anim.SetBool("canDocombo", false);
+    }
 }
