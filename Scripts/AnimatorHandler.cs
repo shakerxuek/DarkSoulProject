@@ -73,6 +73,7 @@ public class AnimatorHandler : MonoBehaviour
     public void CanRotate()
     {
         canRotate=true;
+        
     }
 
     public void StopRotation()
