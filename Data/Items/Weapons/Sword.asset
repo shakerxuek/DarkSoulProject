@@ -19,3 +19,5 @@ MonoBehaviour:
   OH_Light_Attack_1: LightAttack
   OH_Light_Attack_2: LightAttack2
   OH_Heavy_Attack_1: HeavyAttack
+  Right_hand_idle: Right_Arm_idle_01
+  Left_hand_idle: Left_Arm_idle_01
