@@ -182,6 +182,94 @@ public partial class @Playercontrol : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""PlayerQuickSlots"",
+            ""id"": ""e8f115b6-cc32-48b0-aea2-ae4bfdddc979"",
+            ""actions"": [
+                {
+                    ""name"": ""Dpadright"",
+                    ""type"": ""Button"",
+                    ""id"": ""b88af086-57a9-4671-8d52-cbac9661eee7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dpadleft"",
+                    ""type"": ""Button"",
+                    ""id"": ""dc110262-4ae2-4cfe-8342-7e792cc09e44"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dpadup"",
+                    ""type"": ""Button"",
+                    ""id"": ""300c8f4d-596a-4322-b178-628a53a292e3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dpaddown"",
+                    ""type"": ""Button"",
+                    ""id"": ""442108bf-b962-47e2-9c30-0848790a0772"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""fa6bca2b-a2f4-4533-8528-2f946cc3023f"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dpadright"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b808a0bf-6a52-4ecc-974c-431b663b326b"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dpadleft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""22f717ae-ec7f-413b-893a-e4d4d0cb0164"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dpadup"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f94c1fd9-f9cf-487a-baa0-4c8bb459331b"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dpaddown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -195,6 +283,12 @@ public partial class @Playercontrol : IInputActionCollection2, IDisposable
         m_Playeraction_Sprint = m_Playeraction.FindAction("Sprint", throwIfNotFound: true);
         m_Playeraction_RB = m_Playeraction.FindAction("RB", throwIfNotFound: true);
         m_Playeraction_RT = m_Playeraction.FindAction("RT", throwIfNotFound: true);
+        // PlayerQuickSlots
+        m_PlayerQuickSlots = asset.FindActionMap("PlayerQuickSlots", throwIfNotFound: true);
+        m_PlayerQuickSlots_Dpadright = m_PlayerQuickSlots.FindAction("Dpadright", throwIfNotFound: true);
+        m_PlayerQuickSlots_Dpadleft = m_PlayerQuickSlots.FindAction("Dpadleft", throwIfNotFound: true);
+        m_PlayerQuickSlots_Dpadup = m_PlayerQuickSlots.FindAction("Dpadup", throwIfNotFound: true);
+        m_PlayerQuickSlots_Dpaddown = m_PlayerQuickSlots.FindAction("Dpaddown", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -340,6 +434,63 @@ public partial class @Playercontrol : IInputActionCollection2, IDisposable
         }
     }
     public PlayeractionActions @Playeraction => new PlayeractionActions(this);
+
+    // PlayerQuickSlots
+    private readonly InputActionMap m_PlayerQuickSlots;
+    private IPlayerQuickSlotsActions m_PlayerQuickSlotsActionsCallbackInterface;
+    private readonly InputAction m_PlayerQuickSlots_Dpadright;
+    private readonly InputAction m_PlayerQuickSlots_Dpadleft;
+    private readonly InputAction m_PlayerQuickSlots_Dpadup;
+    private readonly InputAction m_PlayerQuickSlots_Dpaddown;
+    public struct PlayerQuickSlotsActions
+    {
+        private @Playercontrol m_Wrapper;
+        public PlayerQuickSlotsActions(@Playercontrol wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Dpadright => m_Wrapper.m_PlayerQuickSlots_Dpadright;
+        public InputAction @Dpadleft => m_Wrapper.m_PlayerQuickSlots_Dpadleft;
+        public InputAction @Dpadup => m_Wrapper.m_PlayerQuickSlots_Dpadup;
+        public InputAction @Dpaddown => m_Wrapper.m_PlayerQuickSlots_Dpaddown;
+        public InputActionMap Get() { return m_Wrapper.m_PlayerQuickSlots; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PlayerQuickSlotsActions set) { return set.Get(); }
+        public void SetCallbacks(IPlayerQuickSlotsActions instance)
+        {
+            if (m_Wrapper.m_PlayerQuickSlotsActionsCallbackInterface != null)
+            {
+                @Dpadright.started -= m_Wrapper.m_PlayerQuickSlotsActionsCallbackInterface.OnDpadright;
+                @Dpadright.performed -= m_Wrapper.m_PlayerQuickSlotsActionsCallbackInterface.OnDpadright;
+                @Dpadright.canceled -= m_Wrapper.m_PlayerQuickSlotsActionsCallbackInterface.OnDpadright;
+                @Dpadleft.started -= m_Wrapper.m_PlayerQuickSlotsActionsCallbackInterface.OnDpadleft;
+                @Dpadleft.performed -= m_Wrapper.m_PlayerQuickSlotsActionsCallbackInterface.OnDpadleft;
+                @Dpadleft.canceled -= m_Wrapper.m_PlayerQuickSlotsActionsCallbackInterface.OnDpadleft;
+                @Dpadup.started -= m_Wrapper.m_PlayerQuickSlotsActionsCallbackInterface.OnDpadup;
+                @Dpadup.performed -= m_Wrapper.m_PlayerQuickSlotsActionsCallbackInterface.OnDpadup;
+                @Dpadup.canceled -= m_Wrapper.m_PlayerQuickSlotsActionsCallbackInterface.OnDpadup;
+                @Dpaddown.started -= m_Wrapper.m_PlayerQuickSlotsActionsCallbackInterface.OnDpaddown;
+                @Dpaddown.performed -= m_Wrapper.m_PlayerQuickSlotsActionsCallbackInterface.OnDpaddown;
+                @Dpaddown.canceled -= m_Wrapper.m_PlayerQuickSlotsActionsCallbackInterface.OnDpaddown;
+            }
+            m_Wrapper.m_PlayerQuickSlotsActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Dpadright.started += instance.OnDpadright;
+                @Dpadright.performed += instance.OnDpadright;
+                @Dpadright.canceled += instance.OnDpadright;
+                @Dpadleft.started += instance.OnDpadleft;
+                @Dpadleft.performed += instance.OnDpadleft;
+                @Dpadleft.canceled += instance.OnDpadleft;
+                @Dpadup.started += instance.OnDpadup;
+                @Dpadup.performed += instance.OnDpadup;
+                @Dpadup.canceled += instance.OnDpadup;
+                @Dpaddown.started += instance.OnDpaddown;
+                @Dpaddown.performed += instance.OnDpaddown;
+                @Dpaddown.canceled += instance.OnDpaddown;
+            }
+        }
+    }
+    public PlayerQuickSlotsActions @PlayerQuickSlots => new PlayerQuickSlotsActions(this);
     public interface IPlayermoveActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -350,5 +501,12 @@ public partial class @Playercontrol : IInputActionCollection2, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnRB(InputAction.CallbackContext context);
         void OnRT(InputAction.CallbackContext context);
+    }
+    public interface IPlayerQuickSlotsActions
+    {
+        void OnDpadright(InputAction.CallbackContext context);
+        void OnDpadleft(InputAction.CallbackContext context);
+        void OnDpadup(InputAction.CallbackContext context);
+        void OnDpaddown(InputAction.CallbackContext context);
     }
 }

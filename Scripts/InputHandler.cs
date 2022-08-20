@@ -19,6 +19,10 @@ public class InputHandler : MonoBehaviour
     public bool b_Input;
     public bool rb_Input;
     public bool rt_Input;
+    public bool dpad_up;
+    public bool dpad_down;
+    public bool dpad_left;
+    public bool dpad_right;
 
 
     Playercontrol inputActions;
@@ -59,6 +63,7 @@ public class InputHandler : MonoBehaviour
         moveInput(delta);
         HandleSPInput(delta);
         HandleAttackInput(delta);
+        HandleQuickSlotsInput();
     }
 
     private void moveInput(float delta)
@@ -113,6 +118,20 @@ public class InputHandler : MonoBehaviour
         if(rt_Input)
         {
             playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
+        }
+    }
+
+    private void HandleQuickSlotsInput()
+    {   
+        inputActions.PlayerQuickSlots.Dpadright.performed += i =>dpad_right=true;
+        inputActions.PlayerQuickSlots.Dpadleft.performed += i =>dpad_left=true;
+        if(dpad_right)
+        {
+            playerInventory.ChangeRightWeapon();
+        }
+        else if(dpad_left)
+        {
+            playerInventory.ChangeLeftWeapon();
         }
     }
 
