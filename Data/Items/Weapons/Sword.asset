@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28d8ac6128a273e4f9ec44193ca1c4be, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: 4ad16adfdf2d1a441879a598de742eb6, type: 3}
   itemName: Sword
-  modelPrefab: {fileID: 1349342350819364348, guid: ed2db194094c8b24fa4a554f2b6d45fa, type: 3}
+  modelPrefab: {fileID: 1349342350819364348, guid: 1ec54d611d5a21942b3a6fa9350a1db6, type: 3}
   isUnarmed: 0
   OH_Light_Attack_1: LightAttack
   OH_Light_Attack_2: LightAttack2

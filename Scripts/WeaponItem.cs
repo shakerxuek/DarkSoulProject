@@ -5,9 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(menuName ="Items/WeaponItem")]
 public class WeaponItem : Item
 {   
-    
     public GameObject modelPrefab;
     public bool isUnarmed;
+
 
     public string OH_Light_Attack_1;
     public string OH_Light_Attack_2;
