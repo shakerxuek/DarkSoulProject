@@ -24,7 +24,7 @@ public class PlayerLocamotion : MonoBehaviour
     float sprintSpeed =7;
     [SerializeField]
     float rotationSpeed =10;
-    float fallingSpeed=39;
+    float fallingSpeed=50;
 
     void Start()
     {   
@@ -192,16 +192,14 @@ public class PlayerLocamotion : MonoBehaviour
                 playerManager.isInAir=true;
             }
         }
-        if(playerManager.isGrounded)
+        
+        if(playerManager.isInteracting || inputHandler.moveAmount >0)
         {
-            if(playerManager.isInteracting || inputHandler.moveAmount >0)
-            {
-                myTransfrom.position =Vector3.Lerp(myTransfrom.position, targetPosition, Time.deltaTime/0.1f);
-            }
-            else
-            {
-                myTransfrom.position =targetPosition;
-            }
+            myTransfrom.position =Vector3.Lerp(myTransfrom.position, targetPosition, Time.deltaTime/0.2f);
+        }
+        else
+        {
+            myTransfrom.position =targetPosition;
         }
     }
 }
