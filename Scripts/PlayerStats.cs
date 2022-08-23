@@ -13,12 +13,17 @@ public class PlayerStats : MonoBehaviour
     public float chipSpeed =2f;
     public Image frontHealthBar;
     public Image backHealthBar;
+    public Image frontStaminaBar;
+    public Image backStaminaBar;
 
     [Header("Damage Overlay")]
     public Image overlay;
     public float duration;
     public float fadespeed;
     private float durationTimer;
+    public float maxStamina;
+    public int StaminaLevel=10;
+    public float currentStamina;
 
     private void Awake() 
     {
@@ -28,6 +33,8 @@ public class PlayerStats : MonoBehaviour
     void Start()
     {
         health=maxHealth;
+        maxStamina=SetMaxStamina();
+        currentStamina=maxStamina;
         overlay.color =new Color(overlay.color.r,overlay.color.g,overlay.color.b, 0);
     }
 
@@ -35,7 +42,9 @@ public class PlayerStats : MonoBehaviour
     void Update()
     {
         health =Mathf.Clamp(health,0,maxHealth);
+        currentStamina =Mathf.Clamp(currentStamina,0,maxStamina);
         UpdateHealthUI();
+        UpdateStaminaUI();
         if(overlay.color.a>0)
         {
             durationTimer +=Time.deltaTime;
@@ -72,6 +81,31 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
+    public void UpdateStaminaUI()
+    {
+        float fillF=frontStaminaBar.fillAmount;
+        float fillB=backStaminaBar.fillAmount;
+        float hFraction=currentStamina/maxStamina;
+        if(fillB>hFraction)
+        {
+            frontStaminaBar.fillAmount=hFraction;
+            backStaminaBar.color=Color.yellow;
+            lerpTimer += Time.deltaTime;
+            float percentComplete =lerpTimer/chipSpeed;
+            percentComplete=percentComplete*percentComplete;
+            backStaminaBar.fillAmount =Mathf.Lerp(fillB,hFraction,percentComplete);
+        }
+        if(fillF<hFraction)
+        {
+            backStaminaBar.color =Color.green;
+            backStaminaBar.fillAmount=hFraction;
+            lerpTimer += Time.deltaTime;
+            float percentComplete=lerpTimer/chipSpeed;
+            percentComplete=percentComplete*percentComplete;
+            frontStaminaBar.fillAmount=Mathf.Lerp(fillF,backStaminaBar.fillAmount,percentComplete);
+        }
+    }
+
     public void TakeDamage(float damage)
     {
         health -=damage;
@@ -86,6 +120,11 @@ public class PlayerStats : MonoBehaviour
             animatorHandler.PlayTargetAnimation("death",true);
         }
     }
+    public void TakStaminaDamage(int damage)
+    {
+        currentStamina=currentStamina-damage;
+        lerpTimer=0f;
+    }
     public void RestoreHealth(float healAmount)
     {
         health+=healAmount;
@@ -95,5 +134,11 @@ public class PlayerStats : MonoBehaviour
     {
         maxHealth+=(health*0.01f)*((100-level)*0.1f);
         health = maxHealth;
+    }
+
+    private float SetMaxStamina()
+    {
+        maxStamina=StaminaLevel*10;
+        return maxStamina;
     }
 }
