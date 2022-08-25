@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WeaponPickup : Interactable
 {
@@ -25,6 +26,9 @@ public class WeaponPickup : Interactable
         playerLocamotion.rigidbody.velocity =Vector3.zero;
         animatorHandler.PlayTargetAnimation("Pick Item",true);
         playerInventory.weaponInventory.Add(weapon);
+        playerManager.IteminteractableGameObject.GetComponentInChildren<Text>().text =weapon.itemName + " (press F again to close the window)";
+        playerManager.IteminteractableGameObject.GetComponentInChildren<RawImage>().texture=weapon.itemIcon.texture;
+        playerManager.IteminteractableGameObject.SetActive(true);
         playerInventory.weaponInRightHandSlots[0]=playerInventory.weaponInventory[0];
         Destroy(gameObject);
     }

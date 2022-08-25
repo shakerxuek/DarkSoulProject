@@ -7,6 +7,10 @@ public class PlayerManager : MonoBehaviour
     InputHandler inputHandler;
     CameraHandler cameraHandler;
     PlayerLocamotion playerLocamotion;
+
+    InteractableUI interactableUI;
+    public GameObject interactableGameObject;
+    public GameObject IteminteractableGameObject;
     Animator anim;
     public bool isInteracting;
     public bool isSpringting;
@@ -22,6 +26,7 @@ public class PlayerManager : MonoBehaviour
         anim=GetComponentInChildren<Animator>();
         cameraHandler =CameraHandler.singleton;
         playerLocamotion=GetComponent<PlayerLocamotion>();
+        interactableUI=FindObjectOfType<InteractableUI>();
     }
 
     void Update()
@@ -80,12 +85,26 @@ public class PlayerManager : MonoBehaviour
                 if(interactableObject!=null)
                 {
                     string interactableText = interactableObject.InteractableText;
+                    interactableUI.interactableText.text=interactableText;
+                    interactableGameObject.SetActive(true);
 
                     if(inputHandler.a_Input)
                     {
                         hit.collider.GetComponent<Interactable>().Interact(this);
                     }
                 }
+            }
+        }
+        else
+        {
+            if(interactableGameObject !=null)
+            {
+                interactableGameObject.SetActive(false);
+            }
+
+            if(IteminteractableGameObject !=null && inputHandler.a_Input)
+            {
+                IteminteractableGameObject.SetActive(false);
             }
         }
     }
