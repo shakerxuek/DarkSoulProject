@@ -24,6 +24,7 @@ public class InputHandler : MonoBehaviour
     public bool dpad_down;
     public bool dpad_left;
     public bool dpad_right;
+    public bool jump_Input;
 
 
     Playercontrol inputActions;
@@ -66,6 +67,7 @@ public class InputHandler : MonoBehaviour
         HandleAttackInput(delta);
         HandleQuickSlotsInput();
         HandleInteractButtonInput();
+        HandelJumpInput();
     }
 
     private void moveInput(float delta)
@@ -140,6 +142,11 @@ public class InputHandler : MonoBehaviour
     private void HandleInteractButtonInput()
     {
         inputActions.Playeraction.A.performed += i =>a_Input=true;
+    }
+
+    private void HandelJumpInput()
+    {
+        inputActions.Playeraction.Jump.performed +=i => jump_Input=true;
     }
 
 }

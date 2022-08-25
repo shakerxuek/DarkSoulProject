@@ -3276,7 +3276,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 867025012}
-  - component: {fileID: 867025014}
   - component: {fileID: 867025013}
   - component: {fileID: 867025019}
   - component: {fileID: 867025016}
@@ -3284,6 +3283,7 @@ GameObject:
   - component: {fileID: 867025015}
   - component: {fileID: 867025020}
   - component: {fileID: 867025017}
+  - component: {fileID: 867025021}
   m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
@@ -3323,20 +3323,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!136 &867025014
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 867025011}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.27507785
-  m_Height: 1.6443434
-  m_Direction: 1
-  m_Center: {x: 0.024922162, y: 0.9778285, z: 0}
 --- !u!114 &867025015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3366,6 +3352,7 @@ MonoBehaviour:
   dpad_down: 0
   dpad_left: 0
   dpad_right: 0
+  jump_Input: 0
 --- !u!114 &867025016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3464,6 +3451,20 @@ MonoBehaviour:
   maxStamina: 0
   StaminaLevel: 10
   currentStamina: 0
+--- !u!136 &867025021
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 867025011}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.27507785
+  m_Height: 1.6443434
+  m_Direction: 1
+  m_Center: {x: 0.024922162, y: 0.9778285, z: 0}
 --- !u!1001 &878949042
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12886,7 +12887,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.37
+  m_Radius: 0.51
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &2066599315
 Transform:

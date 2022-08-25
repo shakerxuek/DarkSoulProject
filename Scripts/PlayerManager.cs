@@ -34,11 +34,13 @@ public class PlayerManager : MonoBehaviour
         float delta=Time.deltaTime;
         isInteracting=anim.GetBool("isInteracting");
         canDocombo=anim.GetBool("canDocombo");
+        anim.SetBool("isInAir",isInAir);
         
         inputHandler.TickInput(delta);
         playerLocamotion.HandleMovement(delta);
         playerLocamotion.HandleSprinting(delta);
         playerLocamotion.HandleFalling(delta,playerLocamotion.moveDirection);
+        playerLocamotion.HandelJumping();
         checkForInteractableObject();
     
     }
@@ -65,6 +67,7 @@ public class PlayerManager : MonoBehaviour
         inputHandler.dpad_left=false;
         inputHandler.dpad_right=false;
         inputHandler.a_Input=false;
+        inputHandler.jump_Input=false;
 
 
         if(isInAir)

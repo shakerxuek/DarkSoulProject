@@ -202,4 +202,22 @@ public class PlayerLocamotion : MonoBehaviour
             myTransfrom.position =targetPosition;
         }
     }
+
+    public void HandelJumping()
+    {
+        if(playerManager.isInteracting)
+            return;
+
+        if(inputHandler.jump_Input)
+        {
+            playerManager.isInteracting=false;
+            moveDirection =cameraObject.forward*inputHandler.vertical;
+            moveDirection+= cameraObject.right *inputHandler.horizontal;
+                
+            animatorHandler.PlayTargetAnimation("Jump forward",true);
+            moveDirection.y=0;
+            Quaternion jumpRotation= Quaternion.LookRotation(moveDirection);
+            myTransfrom.rotation=jumpRotation;
+        }
+    }
 }

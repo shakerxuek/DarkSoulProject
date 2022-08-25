@@ -43,6 +43,7 @@ public class PlayerStats : MonoBehaviour
     {
         health =Mathf.Clamp(health,0,maxHealth);
         currentStamina =Mathf.Clamp(currentStamina,0,maxStamina);
+        
         UpdateHealthUI();
         UpdateStaminaUI();
         if(overlay.color.a>0)
@@ -55,6 +56,7 @@ public class PlayerStats : MonoBehaviour
                 overlay.color =new Color(overlay.color.r,overlay.color.g,overlay.color.b, tempAlpha);
             }
         }
+        
     }
     public void UpdateHealthUI()
     {
@@ -104,6 +106,7 @@ public class PlayerStats : MonoBehaviour
             percentComplete=percentComplete*percentComplete;
             frontStaminaBar.fillAmount=Mathf.Lerp(fillF,backStaminaBar.fillAmount,percentComplete);
         }
+        
     }
 
     public void TakeDamage(float damage)
@@ -123,6 +126,12 @@ public class PlayerStats : MonoBehaviour
     public void TakStaminaDamage(int damage)
     {
         currentStamina=currentStamina-damage;
+        lerpTimer=0f;
+    }
+
+    public void RestoreStamina(float healAmount)
+    {
+        currentStamina+=healAmount;
         lerpTimer=0f;
     }
     public void RestoreHealth(float healAmount)
