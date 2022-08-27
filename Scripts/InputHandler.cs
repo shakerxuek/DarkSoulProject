@@ -16,10 +16,12 @@ public class InputHandler : MonoBehaviour
     public bool sprintFlag;
     public bool comboFlag;
     public bool rollFlag;
+    public bool inventory_Flag;
     public bool a_Input;
     public bool b_Input;
     public bool rb_Input;
     public bool rt_Input;
+    public bool inventory_Input;
     public bool dpad_up;
     public bool dpad_down;
     public bool dpad_left;
@@ -31,6 +33,7 @@ public class InputHandler : MonoBehaviour
     PlayerAttacker playerAttacker;
     PlayerInventory playerInventory;
     PlayerManager playerManager;
+    UImanager uImanager;
 
     Vector2 movementInput;
     Vector2 cameraInput;
@@ -41,6 +44,7 @@ public class InputHandler : MonoBehaviour
         playerAttacker=GetComponent<PlayerAttacker>();
         playerInventory=GetComponent<PlayerInventory>();
         playerManager=GetComponent<PlayerManager>();
+        uImanager=FindObjectOfType<UImanager>();
     }
 
     
@@ -68,6 +72,7 @@ public class InputHandler : MonoBehaviour
         HandleQuickSlotsInput();
         HandleInteractButtonInput();
         HandelJumpInput();
+        HandleInventoryInput();
     }
 
     private void moveInput(float delta)
@@ -147,6 +152,25 @@ public class InputHandler : MonoBehaviour
     private void HandelJumpInput()
     {
         inputActions.Playeraction.Jump.performed +=i => jump_Input=true;
+    }
+
+    private void HandleInventoryInput()
+    {
+        inputActions.Playeraction.Inventory.performed +=i => inventory_Input=true;
+
+        if(inventory_Input)
+        {
+            inventory_Flag= !inventory_Flag;
+            
+            if(inventory_Flag)
+            {
+                uImanager.OpenSelectWindow();
+            }
+            else
+            {
+                uImanager.CloseSelectWindow();
+            }
+        }
     }
 
 }
