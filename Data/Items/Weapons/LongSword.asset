@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28d8ac6128a273e4f9ec44193ca1c4be, type: 3}
   m_Name: LongSword
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: d31aa8412a4d374458c912d11686642a, type: 3}
+  itemIcon: {fileID: 21300000, guid: da3489a989b315644b2918cb9df15709, type: 3}
   itemName: LongSword
   modelPrefab: {fileID: 1349342350819364348, guid: 106041f44f5832240a1d5eb9ef033244, type: 3}
   isUnarmed: 0
@@ -21,3 +21,6 @@ MonoBehaviour:
   OH_Heavy_Attack_1: HeavyAttack
   Right_hand_idle: Right_Arm_idle_01
   Left_hand_idle: Left_Arm_idle_01
+  baseStamina: 0
+  lightAttackMultiplier: 0
+  heavyAttackMultiplier: 0
