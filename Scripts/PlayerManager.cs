@@ -37,9 +37,8 @@ public class PlayerManager : MonoBehaviour
         anim.SetBool("isInAir",isInAir);
         
         inputHandler.TickInput(delta);
-        playerLocamotion.HandleMovement(delta);
+        
         playerLocamotion.HandleSprinting(delta);
-        playerLocamotion.HandleFalling(delta,playerLocamotion.moveDirection);
         playerLocamotion.HandelJumping();
         checkForInteractableObject();
     
@@ -48,18 +47,14 @@ public class PlayerManager : MonoBehaviour
     private void FixedUpdate() 
     {
         float delta =Time.fixedDeltaTime;
-
-        if(cameraHandler !=null)
-        {
-            cameraHandler.FollowTarget(delta);
-            cameraHandler.HandleCameraRotation(delta,inputHandler.mouseX,inputHandler.mouseY);
-        }
+        playerLocamotion.HandleMovement(delta);
+        playerLocamotion.HandleFalling(delta,playerLocamotion.moveDirection);
+        
     }
 
     private void LateUpdate() 
     {   
         inputHandler.rollFlag=false;
-        inputHandler.sprintFlag=false;
         inputHandler.rb_Input=false;
         inputHandler.rt_Input=false;
         inputHandler.dpad_down=false;
@@ -70,7 +65,12 @@ public class PlayerManager : MonoBehaviour
         inputHandler.jump_Input=false;
         inputHandler.inventory_Input=false;
 
-
+        float delta =Time.deltaTime;
+        if(cameraHandler !=null)
+        {
+            cameraHandler.FollowTarget(delta);
+            cameraHandler.HandleCameraRotation(delta,inputHandler.mouseX,inputHandler.mouseY);
+        }
         if(isInAir)
         {
             playerLocamotion.inAirTimer =playerLocamotion.inAirTimer + Time.deltaTime; 

@@ -24,7 +24,7 @@ public class PlayerLocamotion : MonoBehaviour
     float sprintSpeed =7;
     [SerializeField]
     float rotationSpeed =10;
-    float fallingSpeed=50;
+    float fallingSpeed=200;
 
     void Start()
     {   

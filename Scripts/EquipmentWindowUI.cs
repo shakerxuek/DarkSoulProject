@@ -15,7 +15,7 @@ public class EquipmentWindowUI : MonoBehaviour
 
     HandEquipmentSlotUI[] handEquipmentSlotUI;
 
-    private void Start()
+    private void Awake()
     {
         handEquipmentSlotUI=GetComponentsInChildren<HandEquipmentSlotUI>();
     }
