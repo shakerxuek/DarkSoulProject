@@ -10795,8 +10795,8 @@ MonoBehaviour:
   ignoreLayers:
     serializedVersion: 2
     m_Bits: 0
-  lookSpeed: 0.1
-  followSpeed: 0.1
+  lookSpeed: 0.01
+  followSpeed: 5
   pivotSpeed: 0.03
   minimumPivot: -35
   maximumPivot: 35
@@ -11970,6 +11970,10 @@ PrefabInstance:
       propertyPath: IteminteractableGameObject
       value: 
       objectReference: {fileID: 1797802741}
+    - target: {fileID: 860606512721141434, guid: ebc6f287fd0d2d243b6f13a36baafea7, type: 3}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 860606512721141435, guid: ebc6f287fd0d2d243b6f13a36baafea7, type: 3}
       propertyPath: m_RootOrder
       value: 2
