@@ -6877,6 +6877,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 459512, guid: 5192ca6ecc300684cb6da5af87a67b3b, type: 3}
   m_PrefabInstance: {fileID: 1199854815}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1206803624
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1206803625}
+  m_Layer: 0
+  m_Name: Lockon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1206803625
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206803624}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.729, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1798758367}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1240070830
 GameObject:
   m_ObjectHideFlags: 0
@@ -10214,6 +10245,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 459512, guid: 5192ca6ecc300684cb6da5af87a67b3b, type: 3}
   m_PrefabInstance: {fileID: 1759605719}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1765514309
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1765514310}
+  m_Layer: 10
+  m_Name: Lockon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1765514310
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765514309}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.65, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 867025012}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1783893803
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10349,6 +10411,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1797802741}
   m_CullTransparentMesh: 1
+--- !u!1 &1798758362 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2695259797997785845, guid: edd8a6844ae7fb9498903cb95ff941db, type: 3}
+  m_PrefabInstance: {fileID: 2695259799439127258}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1798758363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798758362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31c6bd635c3092c4c8cc741d2fd4e0ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lockOnTransform: {fileID: 1206803625}
+--- !u!4 &1798758367 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2695259797997785832, guid: edd8a6844ae7fb9498903cb95ff941db, type: 3}
+  m_PrefabInstance: {fileID: 2695259799439127258}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1813306264
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10803,6 +10888,9 @@ MonoBehaviour:
   cameraSphereRadius: 0.2
   cameraCollisionOffset: 0.2
   minimumCollisionOffset: 0.2
+  nearestLockonTarget: {fileID: 0}
+  currentLockOnTarget: {fileID: 0}
+  maximumLockonDistance: 30
 --- !u!1001 &1901629878
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11962,6 +12050,10 @@ PrefabInstance:
       propertyPath: weaponInRightHandSlots.Array.data[3]
       value: 
       objectReference: {fileID: 11400000, guid: ee040f8cd2b2de644b95c7786d00eca8, type: 2}
+    - target: {fileID: 860606512721141430, guid: ebc6f287fd0d2d243b6f13a36baafea7, type: 3}
+      propertyPath: lockOnTransform
+      value: 
+      objectReference: {fileID: 1765514310}
     - target: {fileID: 860606512721141430, guid: ebc6f287fd0d2d243b6f13a36baafea7, type: 3}
       propertyPath: interactableGameObject
       value: 
