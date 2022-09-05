@@ -44,6 +44,24 @@ public partial class @Playercontrol : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Lock on Left"",
+                    ""type"": ""Button"",
+                    ""id"": ""3e8b4ba9-9478-4324-bbed-e165bb0b6358"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Lock on Right"",
+                    ""type"": ""Button"",
+                    ""id"": ""e39cc0ff-c45a-4735-904d-72e921c2bfd8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -110,6 +128,28 @@ public partial class @Playercontrol : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Camera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2cb3b538-3869-42c9-82df-93dae725927c"",
+                    ""path"": ""<Keyboard>/leftBracket"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Lock on Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4c2d5d38-e48a-4aac-9494-875cd42198aa"",
+                    ""path"": ""<Keyboard>/rightBracket"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Lock on Right"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -358,6 +398,8 @@ public partial class @Playercontrol : IInputActionCollection2, IDisposable
         m_Playermove = asset.FindActionMap("Playermove", throwIfNotFound: true);
         m_Playermove_Movement = m_Playermove.FindAction("Movement", throwIfNotFound: true);
         m_Playermove_Camera = m_Playermove.FindAction("Camera", throwIfNotFound: true);
+        m_Playermove_LockonLeft = m_Playermove.FindAction("Lock on Left", throwIfNotFound: true);
+        m_Playermove_LockonRight = m_Playermove.FindAction("Lock on Right", throwIfNotFound: true);
         // Playeraction
         m_Playeraction = asset.FindActionMap("Playeraction", throwIfNotFound: true);
         m_Playeraction_Sprint = m_Playeraction.FindAction("Sprint", throwIfNotFound: true);
@@ -434,12 +476,16 @@ public partial class @Playercontrol : IInputActionCollection2, IDisposable
     private IPlayermoveActions m_PlayermoveActionsCallbackInterface;
     private readonly InputAction m_Playermove_Movement;
     private readonly InputAction m_Playermove_Camera;
+    private readonly InputAction m_Playermove_LockonLeft;
+    private readonly InputAction m_Playermove_LockonRight;
     public struct PlayermoveActions
     {
         private @Playercontrol m_Wrapper;
         public PlayermoveActions(@Playercontrol wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Playermove_Movement;
         public InputAction @Camera => m_Wrapper.m_Playermove_Camera;
+        public InputAction @LockonLeft => m_Wrapper.m_Playermove_LockonLeft;
+        public InputAction @LockonRight => m_Wrapper.m_Playermove_LockonRight;
         public InputActionMap Get() { return m_Wrapper.m_Playermove; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -455,6 +501,12 @@ public partial class @Playercontrol : IInputActionCollection2, IDisposable
                 @Camera.started -= m_Wrapper.m_PlayermoveActionsCallbackInterface.OnCamera;
                 @Camera.performed -= m_Wrapper.m_PlayermoveActionsCallbackInterface.OnCamera;
                 @Camera.canceled -= m_Wrapper.m_PlayermoveActionsCallbackInterface.OnCamera;
+                @LockonLeft.started -= m_Wrapper.m_PlayermoveActionsCallbackInterface.OnLockonLeft;
+                @LockonLeft.performed -= m_Wrapper.m_PlayermoveActionsCallbackInterface.OnLockonLeft;
+                @LockonLeft.canceled -= m_Wrapper.m_PlayermoveActionsCallbackInterface.OnLockonLeft;
+                @LockonRight.started -= m_Wrapper.m_PlayermoveActionsCallbackInterface.OnLockonRight;
+                @LockonRight.performed -= m_Wrapper.m_PlayermoveActionsCallbackInterface.OnLockonRight;
+                @LockonRight.canceled -= m_Wrapper.m_PlayermoveActionsCallbackInterface.OnLockonRight;
             }
             m_Wrapper.m_PlayermoveActionsCallbackInterface = instance;
             if (instance != null)
@@ -465,6 +517,12 @@ public partial class @Playercontrol : IInputActionCollection2, IDisposable
                 @Camera.started += instance.OnCamera;
                 @Camera.performed += instance.OnCamera;
                 @Camera.canceled += instance.OnCamera;
+                @LockonLeft.started += instance.OnLockonLeft;
+                @LockonLeft.performed += instance.OnLockonLeft;
+                @LockonLeft.canceled += instance.OnLockonLeft;
+                @LockonRight.started += instance.OnLockonRight;
+                @LockonRight.performed += instance.OnLockonRight;
+                @LockonRight.canceled += instance.OnLockonRight;
             }
         }
     }
@@ -611,6 +669,8 @@ public partial class @Playercontrol : IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnCamera(InputAction.CallbackContext context);
+        void OnLockonLeft(InputAction.CallbackContext context);
+        void OnLockonRight(InputAction.CallbackContext context);
     }
     public interface IPlayeractionActions
     {

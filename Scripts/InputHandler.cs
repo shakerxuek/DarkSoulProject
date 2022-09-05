@@ -23,6 +23,8 @@ public class InputHandler : MonoBehaviour
     public bool rb_Input;
     public bool rt_Input;
     public bool lockon_Input;
+    public bool lockonleft_Input;
+    public bool lockonright_Input;
     public bool inventory_Input;
     public bool dpad_up;
     public bool dpad_down;
@@ -67,6 +69,8 @@ public class InputHandler : MonoBehaviour
             inputActions.Playeraction.Jump.performed +=i => jump_Input=true;
             inputActions.Playeraction.Inventory.performed +=i => inventory_Input=true;
             inputActions.Playeraction.Lockon.performed +=i=> lockon_Input=true;
+            inputActions.Playermove.LockonLeft.performed +=i=>lockonleft_Input=true;
+            inputActions.Playermove.LockonRight.performed+=i=>lockonright_Input=true;
         }
         inputActions.Enable();
     }
@@ -174,7 +178,6 @@ public class InputHandler : MonoBehaviour
     {
         if(lockon_Input && lockonFlag == false)
         {   
-            cameraHandler.ClearLockOnTargets();
             lockon_Input=false;
             cameraHandler.HandleLockon();
             if(cameraHandler.nearestLockonTarget !=null)
@@ -189,6 +192,26 @@ public class InputHandler : MonoBehaviour
             lockon_Input=false;
             lockonFlag=false;
             cameraHandler.ClearLockOnTargets();
+        }
+
+        if(lockonFlag && lockonright_Input)
+        {
+            lockonright_Input=false;
+            cameraHandler.HandleLockon();
+            if(cameraHandler.rightLockTarget !=null)
+            {
+                cameraHandler.currentLockOnTarget=cameraHandler.rightLockTarget;
+            }
+        }
+
+        if(lockonFlag && lockonleft_Input)
+        {
+            lockonleft_Input=false;
+            cameraHandler.HandleLockon();
+            if(cameraHandler.leftLockTarget !=null)
+            {
+                cameraHandler.currentLockOnTarget=cameraHandler.leftLockTarget;
+            }
         }
     }
 

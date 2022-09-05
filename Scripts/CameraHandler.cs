@@ -32,6 +32,8 @@ public class CameraHandler : MonoBehaviour
     public Transform nearestLockonTarget;
     public Transform currentLockOnTarget;
     public float maximumLockonDistance =30;
+    public Transform leftLockTarget;
+    public Transform rightLockTarget;
     List <characterManager> avilableTargets = new List<characterManager>();
     private void Awake() 
     {   
@@ -116,8 +118,11 @@ public class CameraHandler : MonoBehaviour
     }
 
     public void HandleLockon()
-    {
+    {   
+        avilableTargets.Clear();
         float shortestDistance=Mathf.Infinity;
+        float shortestDistanceOfLeftTarget = Mathf.Infinity;
+        float shortestDistanceOfRightTarget = Mathf.Infinity;
 
         Collider[] colliders =Physics.OverlapSphere(targetTransform.position, 26);
 
@@ -145,6 +150,25 @@ public class CameraHandler : MonoBehaviour
             {
                 shortestDistance=distanceFromTarget;
                 nearestLockonTarget=avilableTargets[k].lockOnTransform;
+            }
+
+            if(inputHandler.lockonFlag)
+            {
+                Vector3 relativeEnemyPosition=currentLockOnTarget.InverseTransformPoint(avilableTargets[k].transform.position);
+                var distanceFromLeftTarget=currentLockOnTarget.transform.position.x-avilableTargets[k].transform.position.x;
+                var distanceFromRightTarget=currentLockOnTarget.transform.position.x+avilableTargets[k].transform.position.x;
+
+                if(relativeEnemyPosition.x>0.00 && distanceFromLeftTarget < shortestDistanceOfLeftTarget)
+                {
+                    shortestDistanceOfLeftTarget=distanceFromTarget;
+                    leftLockTarget=avilableTargets[k].lockOnTransform;
+                }
+                
+                if(relativeEnemyPosition.x< 0.00 && distanceFromRightTarget < shortestDistanceOfRightTarget)
+                {
+                    shortestDistanceOfRightTarget=distanceFromRightTarget;
+                    rightLockTarget= avilableTargets[k].lockOnTransform;
+                }
             }
         }
     }
