@@ -25,19 +25,19 @@ public class AnimatorHandler : MonoBehaviour
     {
         float v =0;
 
-        if(verticalMovement >0 && verticalMovement <0.55f)
+        if(verticalMovement >0 && verticalMovement < 0.55f)
         {
             v=0.5f;
         }
-        else if(verticalMovement >0.55f)
+        else if(verticalMovement > 0.55f)
         {
             v=1;
         }
-        else if(verticalMovement <0 && verticalMovement >-0.55f)
+        else if(verticalMovement < 0 && verticalMovement > -0.55f)
         {
             v=-0.5f;
         }
-        else if(verticalMovement <0.55f)
+        else if(verticalMovement < -0.55f)
         {
             v=-1;
         }
@@ -48,11 +48,19 @@ public class AnimatorHandler : MonoBehaviour
 
         float h=0;
 
-        if(horizontalMovement >0 && horizontalMovement <0.55f)
+        if(horizontalMovement > 0 && horizontalMovement < 0.55f)
         {
             h = 0.5f;
         }
-        else if(horizontalMovement <0.55f)
+        else if(horizontalMovement> 0.55f)
+        {
+            h=1;
+        }
+        else if(horizontalMovement< 0 && horizontalMovement > -0.55f)
+        {
+            h=-0.5f;
+        }
+        else if(horizontalMovement < -0.55f)
         {
             h=-1;
         }
@@ -66,6 +74,8 @@ public class AnimatorHandler : MonoBehaviour
             v=2;
             h=horizontalMovement;
         }
+
+        Debug.Log(v+" "+h);
 
         anim.SetFloat(vertical,v,0.1f,Time.deltaTime);
         anim.SetFloat(horizontal,h,0.1f,Time.deltaTime);

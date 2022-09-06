@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerLocamotion : MonoBehaviour
 {   
+    CameraHandler cameraHandler;
     PlayerManager playerManager;
     Transform cameraObject;
     InputHandler inputHandler;
@@ -26,6 +27,10 @@ public class PlayerLocamotion : MonoBehaviour
     float rotationSpeed =10;
     float fallingSpeed=200;
 
+    private void Awake() 
+    {
+        cameraHandler=FindObjectOfType<CameraHandler>();
+    }
     void Start()
     {   
         playerManager=GetComponent<PlayerManager>();
@@ -44,25 +49,60 @@ public class PlayerLocamotion : MonoBehaviour
     Vector3 targetPosition;
 
     private void HandleRotation(float delta)
-    {
-        Vector3 targetDir =Vector3.zero;
-        float moveOveride =inputHandler.moveAmount;
+    {   
+        if(inputHandler.lockonFlag)
+        {   
+            if(inputHandler.sprintFlag || inputHandler.rollFlag)
+            {
+                Vector3 targetDirection =Vector3.zero;
+                targetDirection=cameraHandler.cameraTransform.forward * inputHandler.vertical;
+                targetDirection+=cameraHandler.cameraTransform.right * inputHandler.horizontal;
+                targetDirection.Normalize();
+                targetDirection.y=0;
 
-        targetDir = cameraObject.forward * inputHandler.vertical;
-        targetDir += cameraObject.right * inputHandler.horizontal;
+                if(targetDirection==Vector3.zero)
+                {
+                    targetDirection=transform.forward;
+                }
+                Quaternion tr=Quaternion.LookRotation(targetDirection);
+                Quaternion targetRotation=Quaternion.Slerp(transform.rotation,tr,rotationSpeed*Time.deltaTime);
 
-        targetDir.Normalize();
-        targetDir.y=0;
+                transform.rotation=targetRotation;
+            }
+            else
+            {
+                Vector3 rotationDirection=moveDirection;
+                rotationDirection=cameraHandler.currentLockOnTarget.position-transform.position;
+                rotationDirection.y=0;
+                rotationDirection.Normalize();
+                Quaternion tr= Quaternion.LookRotation(rotationDirection);
+                Quaternion targetRotation=Quaternion.Slerp(transform.rotation,tr,rotationSpeed*Time.deltaTime);
+                transform.rotation=targetRotation;
+            }
+            
+        }
+        else
+        {
+            Vector3 targetDir =Vector3.zero;
+            float moveOveride =inputHandler.moveAmount;
 
-        if(targetDir == Vector3.zero)
-            targetDir= myTransfrom.forward;
+            targetDir = cameraObject.forward * inputHandler.vertical;
+            targetDir += cameraObject.right * inputHandler.horizontal;
 
-        float rs=rotationSpeed;
+            targetDir.Normalize();
+            targetDir.y=0;
 
-        Quaternion tr = Quaternion.LookRotation(targetDir);
-        Quaternion targetRotation = Quaternion.Slerp(myTransfrom.rotation, tr, rs*delta);
+            if(targetDir == Vector3.zero)
+                targetDir= myTransfrom.forward;
 
-        myTransfrom.rotation=targetRotation;
+            float rs=rotationSpeed;
+
+            Quaternion tr = Quaternion.LookRotation(targetDir);
+            Quaternion targetRotation = Quaternion.Slerp(myTransfrom.rotation, tr, rs*delta);
+
+            myTransfrom.rotation=targetRotation;
+        }
+        
     }
 
     
@@ -94,7 +134,15 @@ public class PlayerLocamotion : MonoBehaviour
         Vector3 projectedVelocity =Vector3.ProjectOnPlane(moveDirection, normalVector);
         rigidbody.velocity = projectedVelocity;   
 
-        animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount,0,playerManager.isSpringting);
+        if(inputHandler.lockonFlag && inputHandler.sprintFlag==false) 
+        {   
+            animatorHandler.UpdateAnimatorValues(inputHandler.vertical,inputHandler.horizontal,playerManager.isSpringting);
+        }
+        else
+        {   
+            animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount,0,playerManager.isSpringting);
+        }
+        
         
         if(animatorHandler.canRotate)
         {

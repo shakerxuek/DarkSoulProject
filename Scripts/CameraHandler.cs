@@ -5,12 +5,14 @@ using UnityEngine;
 public class CameraHandler : MonoBehaviour
 {   
     InputHandler inputHandler;
+    PlayerManager playerManager;
     public Transform targetTransform;
     public Transform cameraTransform;
     public Transform cameraPivotTransform;
     private Transform myTransform;
     private Vector3 cameraTransformPosition;
     public LayerMask ignoreLayers;
+    public LayerMask environmentLayer;
     private Vector3 cameraFollowVelocity= Vector3.zero;
 
     public static CameraHandler singleton;
@@ -42,6 +44,11 @@ public class CameraHandler : MonoBehaviour
         myTransform=transform;
         defaultPosition=cameraTransform.localPosition.z;
         ignoreLayers=~(1<<8 | 1<<9 | 1<<10);
+        playerManager=FindObjectOfType<PlayerManager>();
+    }
+    private void Start() 
+    {
+        environmentLayer=LayerMask.NameToLayer("Environment");
     }
 
     public void FollowTarget(float delta)
@@ -123,7 +130,7 @@ public class CameraHandler : MonoBehaviour
         float shortestDistance=Mathf.Infinity;
         float shortestDistanceOfLeftTarget = Mathf.Infinity;
         float shortestDistanceOfRightTarget = Mathf.Infinity;
-
+        RaycastHit hit;
         Collider[] colliders =Physics.OverlapSphere(targetTransform.position, 26);
 
         for (int i = 0; i < colliders.Length; i++)
@@ -136,8 +143,20 @@ public class CameraHandler : MonoBehaviour
                 float viewableAngle =Vector3.Angle(lockTargetDirection,cameraTransform.forward);
 
                 if(character.transform.root != targetTransform.transform.root && viewableAngle >-50 &&viewableAngle < 50 && distanceFromTarget <= maximumLockonDistance)
-                {
-                    avilableTargets.Add(character);
+                {   
+                    if(Physics.Linecast(playerManager.lockOnTransform.position, character.lockOnTransform.position, out hit))
+                    {   
+                        Debug.DrawLine(playerManager.lockOnTransform.position, character.lockOnTransform.position);
+                        if(hit.transform.gameObject.layer==environmentLayer)
+                        {
+                            Debug.Log("can not reach the target");
+                        }
+                        else
+                        {
+                            avilableTargets.Add(character);
+                        }
+                    }
+                    
                 }
             }
         }
