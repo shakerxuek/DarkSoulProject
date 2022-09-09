@@ -28,73 +28,51 @@ public class PlayerInventory : MonoBehaviour
     
     private void Start()
     {
-        rightWeapon=unarmedWeapon;
-        leftWeapon=unarmedWeapon;
+        // rightWeapon=weaponInRightHandSlots[0];
+        // leftWeapon=weaponInLeftHandSlots[0];
+        // weaponSlotManager.LoadWeaponOnSlot(rightWeapon, false);
+        // weaponSlotManager.LoadWeaponOnSlot(leftWeapon,true);
     }
 
     public void ChangeRightWeapon()
     {
-        currentRightWeaponIndex=currentRightWeaponIndex+1;
+        currentRightWeaponIndex = currentRightWeaponIndex + 1;
 
-        if(currentRightWeaponIndex==0 && weaponInRightHandSlots[0]!=null)
-        {
-            rightWeapon=weaponInRightHandSlots[currentRightWeaponIndex];
-            weaponSlotManager.LoadWeaponOnSlot(rightWeapon,false);
-        }
-        else if (currentRightWeaponIndex==0 && weaponInRightHandSlots[0]==null)
-        {
-            currentRightWeaponIndex=currentRightWeaponIndex+1;
-        }
-
-        else if(currentRightWeaponIndex==1 && weaponInRightHandSlots[1]!=null)
-        {
-            rightWeapon=weaponInRightHandSlots[currentRightWeaponIndex];
-            weaponSlotManager.LoadWeaponOnSlot(rightWeapon,false);
-        }
-
-        else
-        {
-            currentRightWeaponIndex=currentRightWeaponIndex+1;
-        }
-
-        if(currentRightWeaponIndex > weaponInRightHandSlots.Length-1)
-        {
-            currentRightWeaponIndex=-1;
-            rightWeapon=unarmedWeapon;
-            weaponSlotManager.LoadWeaponOnSlot(unarmedWeapon, false);
-        }
+            if (currentRightWeaponIndex > weaponInRightHandSlots.Length - 1)
+            {
+                currentRightWeaponIndex = -1;
+                rightWeapon = unarmedWeapon;
+                weaponSlotManager.LoadWeaponOnSlot(unarmedWeapon, false);
+            }
+            else if (weaponInRightHandSlots[currentRightWeaponIndex] != null)
+            {
+                rightWeapon = weaponInRightHandSlots[currentRightWeaponIndex];
+                weaponSlotManager.LoadWeaponOnSlot(weaponInRightHandSlots[currentRightWeaponIndex], false);
+            }
+            else
+            {
+                currentRightWeaponIndex = currentRightWeaponIndex + 1;
+            }
     }
 
     public void ChangeLeftWeapon()
     {
-        currentLeftWeaponIndex=currentLeftWeaponIndex+1;
+        currentLeftWeaponIndex = currentLeftWeaponIndex + 1;
 
-        if(currentLeftWeaponIndex==0 && weaponInLeftHandSlots[0]!=null)
-        {
-            leftWeapon=weaponInLeftHandSlots[currentLeftWeaponIndex];
-            weaponSlotManager.LoadWeaponOnSlot(leftWeapon,true);
-        }
-        else if (currentLeftWeaponIndex==0 && weaponInLeftHandSlots[0]==null)
-        {
-            currentLeftWeaponIndex=currentLeftWeaponIndex+1;
-        }
-
-        else if(currentLeftWeaponIndex==1 && weaponInLeftHandSlots[1]!=null)
-        {
-            leftWeapon=weaponInLeftHandSlots[currentLeftWeaponIndex];
-            weaponSlotManager.LoadWeaponOnSlot(leftWeapon,true);
-        }
-
-        else
-        {
-            currentLeftWeaponIndex=currentLeftWeaponIndex+1;
-        }
-
-        if(currentLeftWeaponIndex > weaponInLeftHandSlots.Length-1)
-        {
-            currentLeftWeaponIndex=-1;
-            leftWeapon=unarmedWeapon;
-            weaponSlotManager.LoadWeaponOnSlot(unarmedWeapon, true);
-        }
+            if (currentLeftWeaponIndex > weaponInLeftHandSlots.Length - 1)
+            {
+                currentLeftWeaponIndex = -1;
+                leftWeapon = unarmedWeapon;
+                weaponSlotManager.LoadWeaponOnSlot(unarmedWeapon, true);
+            }
+            else if (weaponInLeftHandSlots[currentLeftWeaponIndex] != null)
+            {
+                leftWeapon = weaponInLeftHandSlots[currentLeftWeaponIndex];
+                weaponSlotManager.LoadWeaponOnSlot(weaponInLeftHandSlots[currentLeftWeaponIndex], true);
+            }
+            else
+            {
+                currentLeftWeaponIndex = currentLeftWeaponIndex + 1;
+            }
     }
 }

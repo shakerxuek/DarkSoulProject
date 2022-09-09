@@ -29,7 +29,6 @@ public class WeaponPickup : Interactable
         playerManager.IteminteractableGameObject.GetComponentInChildren<Text>().text =weapon.itemName + " (press F again to close the window)";
         playerManager.IteminteractableGameObject.GetComponentInChildren<RawImage>().texture=weapon.itemIcon.texture;
         playerManager.IteminteractableGameObject.SetActive(true);
-        playerInventory.weaponInRightHandSlots[0]=playerInventory.weaponInventory[0];
         Destroy(gameObject);
     }
 }

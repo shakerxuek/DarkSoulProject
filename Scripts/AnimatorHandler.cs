@@ -74,9 +74,6 @@ public class AnimatorHandler : MonoBehaviour
             v=2;
             h=horizontalMovement;
         }
-
-        Debug.Log(v+" "+h);
-
         anim.SetFloat(vertical,v,0.1f,Time.deltaTime);
         anim.SetFloat(horizontal,h,0.1f,Time.deltaTime);
     }
