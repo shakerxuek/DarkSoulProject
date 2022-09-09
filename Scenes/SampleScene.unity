@@ -12995,6 +12995,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1190735639}
     - target: {fileID: 860606512721141429, guid: ebc6f287fd0d2d243b6f13a36baafea7, type: 3}
+      propertyPath: leftWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 7efa2333538357a43aac33ce4b2b2629, type: 2}
+    - target: {fileID: 860606512721141429, guid: ebc6f287fd0d2d243b6f13a36baafea7, type: 3}
+      propertyPath: rightWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 7efa2333538357a43aac33ce4b2b2629, type: 2}
+    - target: {fileID: 860606512721141429, guid: ebc6f287fd0d2d243b6f13a36baafea7, type: 3}
       propertyPath: weaponInLeftHandSlots.Array.size
       value: 4
       objectReference: {fileID: 0}

@@ -13,6 +13,7 @@ public class WeaponItem : Item
 
     public string Right_hand_idle;
     public string Left_hand_idle;
+    public string twohand_idle;
 
     public int baseStamina;
     public float lightAttackMultiplier;

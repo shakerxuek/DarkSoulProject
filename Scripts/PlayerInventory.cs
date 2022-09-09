@@ -28,10 +28,7 @@ public class PlayerInventory : MonoBehaviour
     
     private void Start()
     {
-        // rightWeapon=weaponInRightHandSlots[0];
-        // leftWeapon=weaponInLeftHandSlots[0];
-        // weaponSlotManager.LoadWeaponOnSlot(rightWeapon, false);
-        // weaponSlotManager.LoadWeaponOnSlot(leftWeapon,true);
+        
     }
 
     public void ChangeRightWeapon()

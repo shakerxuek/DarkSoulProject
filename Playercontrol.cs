@@ -221,6 +221,15 @@ public partial class @Playercontrol : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Y"",
+                    ""type"": ""Button"",
+                    ""id"": ""1a300cbb-3d9e-44a7-89b0-2e05e3a0eeea"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -298,6 +307,17 @@ public partial class @Playercontrol : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Lockon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""57a3bb8c-881c-4cf3-9668-4af6a6dad209"",
+                    ""path"": ""<Keyboard>/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Y"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -409,6 +429,7 @@ public partial class @Playercontrol : IInputActionCollection2, IDisposable
         m_Playeraction_Jump = m_Playeraction.FindAction("Jump", throwIfNotFound: true);
         m_Playeraction_Inventory = m_Playeraction.FindAction("Inventory", throwIfNotFound: true);
         m_Playeraction_Lockon = m_Playeraction.FindAction("Lockon", throwIfNotFound: true);
+        m_Playeraction_Y = m_Playeraction.FindAction("Y", throwIfNotFound: true);
         // PlayerQuickSlots
         m_PlayerQuickSlots = asset.FindActionMap("PlayerQuickSlots", throwIfNotFound: true);
         m_PlayerQuickSlots_Dpadright = m_PlayerQuickSlots.FindAction("Dpadright", throwIfNotFound: true);
@@ -538,6 +559,7 @@ public partial class @Playercontrol : IInputActionCollection2, IDisposable
     private readonly InputAction m_Playeraction_Jump;
     private readonly InputAction m_Playeraction_Inventory;
     private readonly InputAction m_Playeraction_Lockon;
+    private readonly InputAction m_Playeraction_Y;
     public struct PlayeractionActions
     {
         private @Playercontrol m_Wrapper;
@@ -549,6 +571,7 @@ public partial class @Playercontrol : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Playeraction_Jump;
         public InputAction @Inventory => m_Wrapper.m_Playeraction_Inventory;
         public InputAction @Lockon => m_Wrapper.m_Playeraction_Lockon;
+        public InputAction @Y => m_Wrapper.m_Playeraction_Y;
         public InputActionMap Get() { return m_Wrapper.m_Playeraction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -579,6 +602,9 @@ public partial class @Playercontrol : IInputActionCollection2, IDisposable
                 @Lockon.started -= m_Wrapper.m_PlayeractionActionsCallbackInterface.OnLockon;
                 @Lockon.performed -= m_Wrapper.m_PlayeractionActionsCallbackInterface.OnLockon;
                 @Lockon.canceled -= m_Wrapper.m_PlayeractionActionsCallbackInterface.OnLockon;
+                @Y.started -= m_Wrapper.m_PlayeractionActionsCallbackInterface.OnY;
+                @Y.performed -= m_Wrapper.m_PlayeractionActionsCallbackInterface.OnY;
+                @Y.canceled -= m_Wrapper.m_PlayeractionActionsCallbackInterface.OnY;
             }
             m_Wrapper.m_PlayeractionActionsCallbackInterface = instance;
             if (instance != null)
@@ -604,6 +630,9 @@ public partial class @Playercontrol : IInputActionCollection2, IDisposable
                 @Lockon.started += instance.OnLockon;
                 @Lockon.performed += instance.OnLockon;
                 @Lockon.canceled += instance.OnLockon;
+                @Y.started += instance.OnY;
+                @Y.performed += instance.OnY;
+                @Y.canceled += instance.OnY;
             }
         }
     }
@@ -681,6 +710,7 @@ public partial class @Playercontrol : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
         void OnLockon(InputAction.CallbackContext context);
+        void OnY(InputAction.CallbackContext context);
     }
     public interface IPlayerQuickSlotsActions
     {

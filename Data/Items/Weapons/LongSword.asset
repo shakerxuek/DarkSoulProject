@@ -21,6 +21,7 @@ MonoBehaviour:
   OH_Heavy_Attack_1: HeavyAttack
   Right_hand_idle: Right_Arm_idle_01
   Left_hand_idle: Left_Arm_idle_01
+  twohand_idle: twohand_idle
   baseStamina: 0
   lightAttackMultiplier: 0
   heavyAttackMultiplier: 0
