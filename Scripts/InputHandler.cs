@@ -229,7 +229,6 @@ public class InputHandler : MonoBehaviour
             twohandFlag=!twohandFlag;
             if(twohandFlag && playerInventory.rightWeapon!=null)
             {   
-                playerInventory.leftWeapon=playerInventory.unarmedWeapon;
                 weaponSlotManager.LoadWeaponOnSlot(playerInventory.leftWeapon,true);
                 weaponSlotManager.LoadWeaponOnSlot(playerInventory.rightWeapon,false);
             }

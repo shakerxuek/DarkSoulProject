@@ -10,6 +10,9 @@ public class WeaponItem : Item
     public string OH_Light_Attack_1;
     public string OH_Light_Attack_2;
     public string OH_Heavy_Attack_1;
+    public string th_attack1;
+    public string th_attack2;
+    public string th_attack3;
 
     public string Right_hand_idle;
     public string Left_hand_idle;
